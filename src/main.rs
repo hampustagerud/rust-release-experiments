@@ -28,7 +28,12 @@ fn main() {
 
 			return;
 		},
-		_ => {},
+		Some(name) => {
+			println!("hello, {name}");
+
+			return;
+		},
+		None => {},
 	}
 
 	match greet(r#"{"name":"world"}"#) {
