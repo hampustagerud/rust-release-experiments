@@ -17,10 +17,18 @@ fn greet(json: &str) -> serde_json::Result<String> {
 }
 
 fn main() {
-	if std::env::args().nth(1).as_deref() == Some("--version") {
-		println!("{VERSION}");
+	match std::env::args().nth(1).as_deref() {
+		Some("--version") => {
+			println!("{VERSION}");
 
-		return;
+			return;
+		},
+		Some("--help") => {
+			println!("usage: release-test [--help | --version]");
+
+			return;
+		},
+		_ => {},
 	}
 
 	match greet(r#"{"name":"world"}"#) {
