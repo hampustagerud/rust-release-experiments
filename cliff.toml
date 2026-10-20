@@ -1,5 +1,9 @@
 [changelog]
 body = """
+{% if not previous.version -%}
+Initial release.
+
+{% endif -%}
 {% set breaking = commits | filter(attribute="breaking", value=true) -%}
 {% if breaking -%}
 ### ⚠ Breaking changes
