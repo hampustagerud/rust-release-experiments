@@ -23,8 +23,8 @@ fn main() {
 
 			return;
 		},
-		Some("--help") => {
-			println!("usage: release-test [--help | --version]");
+		Some("-h") => {
+			println!("usage: release-test [-h | --version]");
 
 			return;
 		},
