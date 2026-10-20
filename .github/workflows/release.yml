@@ -40,7 +40,7 @@ jobs:
           fi
 
   build:
-    name: Build (${{ matrix.target }})
+    name: Build
     needs: version
     if: needs.version.outputs.tag != ''
     strategy:
