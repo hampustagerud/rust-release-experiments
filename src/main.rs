@@ -34,7 +34,7 @@ fn main() {
 	match greet(r#"{"name":"world"}"#) {
 		Ok(message) => println!("{message}"),
 		Err(error) => {
-			eprintln!("{error}");
+			eprintln!("error: {error}");
 			std::process::exit(1);
 		},
 	}
