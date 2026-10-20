@@ -32,7 +32,7 @@ jobs:
         name: Next version
         run: |
           latest=$(git tag --list 'v*' --sort=-v:refname | head -n 1)
-          next=$(git-cliff --offline --bumped-version)
+          next=$(git-cliff --offline --unreleased --bumped-version)
           echo "latest=${latest:-none} next=$next"
 
           if [ "$next" != "$latest" ]; then

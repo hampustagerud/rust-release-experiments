@@ -34,7 +34,7 @@ commit_parsers = [
 	{ message = "^fix", group = "<!-- 1 -->Bug fixes" },
 	{ message = "^perf", group = "<!-- 2 -->Performance" },
 	{ message = "^revert", group = "<!-- 3 -->Reverts" },
-	{ message = "^(chore|docs|refactor|style|test|ci|build)", skip = true },
+	{ message = "^(chore|docs|refactor|style|test|ci|build)(\\(.+\\))?!?:", skip = true },
 ]
 
 [bump]
