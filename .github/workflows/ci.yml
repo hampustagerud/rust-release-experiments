@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v2
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: tombi
+      - run: cargo fmt --check
+      - run: tombi format --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test --locked

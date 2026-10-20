@@ -1,0 +1,6 @@
+[format.rules]
+indent-style = "tab"
+line-width = 80
+
+[schema.format.rules]
+table-keys-order.enabled = false

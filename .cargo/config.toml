@@ -1,0 +1,16 @@
+[alias]
+build-release = [
+	"build",
+	"--release",
+	"-Z",
+	"build-std=std,panic_abort,proc_macro",
+	"-Z",
+	"build-std-features=optimize_for_size",
+]
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+panic = "immediate-abort"
+strip = true
