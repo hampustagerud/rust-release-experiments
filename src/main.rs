@@ -16,10 +16,22 @@ fn greet(json: &str) -> serde_json::Result<String> {
 	Ok(format!("hello, {}", greeting.name))
 }
 
+fn shout(message: &str) -> String {
+	message.to_uppercase()
+}
+
 fn main() {
 	match std::env::args().nth(1).as_deref() {
 		Some("--version") => {
 			println!("{VERSION}");
+
+			return;
+		},
+		Some("--shout") => {
+			match greet(r#"{"name":"world"}"#) {
+				Ok(message) => println!("{}", shout(&message)),
+				Err(error) => eprintln!("error: {error}"),
+			}
 
 			return;
 		},
