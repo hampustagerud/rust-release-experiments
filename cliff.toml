@@ -1,5 +1,11 @@
 [changelog]
 body = """
+{%- macro entry(commit) -%}
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | upper_first }}\
+{% if commit.remote.username %} by @{{ commit.remote.username }}{% endif %}\
+{% if commit.remote.pr_number %} in [#{{ commit.remote.pr_number }}](https://github.com/hampustagerud/rust-release-experiments/pull/{{ commit.remote.pr_number }}){% endif %} \
+([{{ commit.id | truncate(length=7, end="") }}](https://github.com/hampustagerud/rust-release-experiments/commit/{{ commit.id }}))
+{%- endmacro entry -%}
 {% if not previous.version -%}
 Initial release.
 
@@ -8,13 +14,13 @@ Initial release.
 {% if breaking -%}
 ### ⚠ Breaking changes
 {% for commit in breaking -%}
-- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/hampustagerud/rust-release-experiments/commit/{{ commit.id }}))
+{{ self::entry(commit=commit) }}
 {% endfor %}
 {% endif -%}
 {% for group, group_commits in commits | filter(attribute="breaking", value=false) | group_by(attribute="group") -%}
 ### {{ group | striptags | trim }}
 {% for commit in group_commits -%}
-- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/hampustagerud/rust-release-experiments/commit/{{ commit.id }}))
+{{ self::entry(commit=commit) }}
 {% endfor %}
 {% endfor -%}
 {% if previous.version -%}
@@ -28,6 +34,9 @@ conventional_commits = true
 require_conventional = true
 protect_breaking_commits = true
 tag_pattern = "v[0-9].*"
+commit_preprocessors = [
+	{ pattern = " \\(#[0-9]+\\)", replace = "" },
+]
 commit_parsers = [
 	{ sha = "c0f9b6ef2ef552187a94c3aa2a533588bacf5db7", skip = true },
 	{ message = "^feat", group = "<!-- 0 -->Features" },
