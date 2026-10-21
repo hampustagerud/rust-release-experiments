@@ -39,6 +39,7 @@ commit_preprocessors = [
 ]
 commit_parsers = [
 	{ sha = "c0f9b6ef2ef552187a94c3aa2a533588bacf5db7", skip = true },
+	{ message = "^Merge branch '", skip = true },
 	{ message = "^feat", group = "<!-- 0 -->Features" },
 	{ message = "^fix", group = "<!-- 1 -->Bug fixes" },
 	{ message = "^perf", group = "<!-- 2 -->Performance" },
