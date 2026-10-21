@@ -29,7 +29,7 @@ fn main() {
 			return;
 		},
 		Some(name) => {
-			println!("hello, {name}");
+			println!("hello, {name}!");
 
 			return;
 		},
