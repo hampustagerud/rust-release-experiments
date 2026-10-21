@@ -67,6 +67,11 @@ mod tests {
 	}
 
 	#[test]
+	fn shouts_in_uppercase() {
+		assert_eq!(shout("hello, test"), "HELLO, TEST");
+	}
+
+	#[test]
 	fn rejects_invalid_json() {
 		assert!(greet("{").is_err());
 	}
