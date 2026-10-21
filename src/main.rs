@@ -36,7 +36,7 @@ fn main() {
 			return;
 		},
 		Some("-h") => {
-			println!("Usage: release-test [-h] [--version] [name]");
+			println!("Usage: release-test [-h] [--version] [--shout] [name]");
 
 			return;
 		},
