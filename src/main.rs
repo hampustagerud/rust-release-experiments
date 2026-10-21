@@ -30,7 +30,10 @@ fn main() {
 		Some("--shout") => {
 			match greet(r#"{"name":"world"}"#) {
 				Ok(message) => println!("{}", shout(&message)),
-				Err(error) => eprintln!("error: {error}"),
+				Err(error) => {
+					eprintln!("error: {error}");
+					std::process::exit(1);
+				},
 			}
 
 			return;
